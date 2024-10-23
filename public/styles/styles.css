@@ -1,0 +1,44 @@
+.navbar-style {
+    background-color: #FF6500;
+}
+
+.container {
+    display: inline-flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    justify-content: center;
+    align-content: center;
+}
+
+.dd-style {
+    padding-left: 25px;
+    padding-right: 10px;
+    padding-top: 10px;
+    padding-bottom: 5px;
+}
+
+.card {
+    margin:auto;
+    width: 50%;
+}
+
+.titles {
+    text-align: center;
+}
+
+.resize-it {
+    padding-left: 500px;
+    padding-right: 500px;
+    padding-top: 35px;
+    padding-bottom: 35px;
+}
+
+.jolly-lodger-regular {
+    font-family: "Jolly Lodger", system-ui;
+    font-weight: 400;
+    font-style: normal;
+    color: white;
+  }
+  
