@@ -1,0 +1,32 @@
+<%- include("partials/header.ejs") %>
+
+    <form class="container-fluid justify-content-start">
+        <a class="btn btn-sm btn-outline-dark" type="button" href="/">Go back</a>
+    </form>
+</nav>
+
+<div class="card mycard" style="width: 40rem;">
+    <form class="row g-3" method="POST" action="/new">
+        <div class="col-md-6">
+            <label for="inputMovie" class="form-label">Movie Name</label>
+            <input type="text" class="form-control" id="inputMovie" name="movie" required>
+        </div>
+        <div class="col-md-4">
+            <label for="inputCreator" class="form-label">Your Name</label>
+            <input type="text" class="form-control" id="inputCreator" name="creator" required>
+        </div>
+        <div class="col-md-2">
+            <label for="inputScore" class="form-label">Score</label>
+            <input type="text" class="form-control" id="inputScore" name="score" required>
+        </div>
+        <div class="mb-3">
+            <label for="inputComments" class="form-label">Comments</label>
+            <textarea class="form-control" id="inputComments" rows="3" name="comments" required></textarea>
+        </div>
+        <div class="col-12">
+          <button type="submit" class="btn btn-outline-dark">Submit</button>
+        </div>
+    </form>
+</div>
+
+<%- include("partials/footer.ejs") %>

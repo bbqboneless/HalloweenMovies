@@ -1,31 +1,29 @@
 <%- include("partials/header.ejs") %>
 
-<body>
-    <nav class="navbar navbar-style jolly-lodger-regular">
-        <div class="container-fluid">
-            <span class="navbar-brand mb-0">Halloween 2024</span>
-        </div>
-    </nav>
+    <form class="container-fluid justify-content-start">
+        <a class="btn btn-sm btn-outline-dark" type="button" href="/new">New Entry</a>
+    </form>
+</nav>
 
-    <% if (data) { %>
-        <div class="container jolly-lodger-regular">
-            <% for (let i = 0; i < data.length; i++) { %>
-                <div class="card" style="width: 18rem;">
-                    <div class="card-body">
-                      <h5 class="card-title"><%= data[i].name %></h5>
-                      <h6 class="card-subtitle mb-2 text-body-secondary"><%= data[i].created_by %></h6>
-                      <p class="card-text"><%= data[i].comments %></p>
-                      <h6>Ranking: <%= data[i].ranking %></h6>
-                    </div>
-                  </div>
-            <% } %>
-        </div>
-        
-        </table>
-    <% } else if (error) { %>
-        <div class="titles">
-            <h3><%= error %></h3>
-        </div>
-    <% } %>
-</body>
-</html>
+<% if (data) { %>
+    <div class="container jolly-lodger-regular">
+        <% for (let i = 0; i < data.length; i++) { %>
+            <div class="card" style="width: 18rem;">
+                <div class="card-body">
+                    <h5 class="card-title"><%= data[i].name %></h5>
+                    <h6 class="card-subtitle mb-2 text-body-secondary"><%= data[i].created_by %></h6>
+                    <p class="card-text"><%= data[i].comments %></p>
+                    <h6>Score: <%= data[i].ranking %></h6>
+                </div>
+                </div>
+        <% } %>
+    </div>
+    
+    </table>
+<% } else if (error) { %>
+    <div class="titles">
+        <h3><%= error %></h3>
+    </div>
+<% } %>
+
+<%- include("partials/footer.ejs") %>

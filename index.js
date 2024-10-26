@@ -27,6 +27,24 @@ async function fetchData() {
     return data;
 }
 
+//Function to post data
+async function postData(movieName,creatorName,score,comments){
+    const {data,error} = await supabase
+    .from('movies')
+    .insert([{
+        name: movieName,
+        created_by: creatorName,
+        ranking: score,
+        comments: comments
+    }]);
+
+    if(error){
+        throw new Error(error.message);
+    }
+
+    return data;
+}
+
 app.get("/", async (req, res)=>{
     try{
         const response = await fetchData();
@@ -40,9 +58,26 @@ app.get("/", async (req, res)=>{
     }
 });
 
-app.post("/", async (req, res)=>{
-    const selectedItem = req.body.item;
-    console.log(selectedItem);
+app.get("/new", async (req, res)=>{
+    try{
+        res.render("new_entry.ejs");
+    }catch(error){
+        console.log("Error on rendering new entry.")
+    }
+});
+
+app.post("/new", async (req, res)=>{
+    const { movie, creator, score, comments } = req.body;
+    try{
+        const insertedData = await postData(movie,creator,score,comments);
+        console.log(insertedData);
+        res.redirect("/");
+    } catch(error){
+        console.log("Error inserting data: ",error.message);
+        res.render("index.ejs", {
+            error: error,
+        });
+    }
 });
 
 app.listen(port,()=>{

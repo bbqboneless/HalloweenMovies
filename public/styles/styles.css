@@ -20,7 +20,8 @@
 }
 
 .card {
-    margin:auto;
+    margin: auto;
+    margin-top: 30px;
     width: 50%;
 }
 
@@ -40,5 +41,9 @@
     font-weight: 400;
     font-style: normal;
     color: white;
-  }
+}
+
+.mycard {
+    padding: 10px;
+}
   
