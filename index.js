@@ -27,6 +27,20 @@ async function fetchData() {
     return data;
 }
 
+//Function to get data
+app.get("/", async (req, res)=>{
+    try{
+        const response = await fetchData();
+        //console.log(response);
+        res.render("index.ejs", {data : response});
+    } catch(error) {
+        console.error("Error:", error.message);
+        res.render("index.ejs", {
+          error: error,
+        });
+    }
+});
+
 //Function to post data
 async function postData(movieName,creatorName,score,comments){
     const {data,error} = await supabase
@@ -45,18 +59,19 @@ async function postData(movieName,creatorName,score,comments){
     return data;
 }
 
-app.get("/", async (req, res)=>{
-    try{
-        const response = await fetchData();
-        //console.log(response);
-        res.render("index.ejs", {data : response});
-    } catch(error) {
-        console.error("Error:", error.message);
-        res.render("index.ejs", {
-          error: error,
-        });
+//Function to delete data
+async function deleteData(id){
+    const {data,error} = await supabase
+    .from('movies')
+    .delete()
+    .eq('id',id);
+
+    if(error){
+        throw new Error(error.message);
     }
-});
+
+    return data;
+}
 
 app.get("/new", async (req, res)=>{
     try{
@@ -74,6 +89,21 @@ app.post("/new", async (req, res)=>{
         res.redirect("/");
     } catch(error){
         console.log("Error inserting data: ",error.message);
+        res.render("index.ejs", {
+            error: error,
+        });
+    }
+});
+
+app.post("/delete/:id", async(req,res) => {
+    const id = req.params.id;
+    
+    try{
+        await deleteData(id);
+        console.log(`Deleted movie with id: ${id}`);
+        res.redirect("/");
+    } catch(error){
+        console.log("Error deleting data: ",error.message);
         res.render("index.ejs", {
             error: error,
         });

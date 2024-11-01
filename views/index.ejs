@@ -14,12 +14,13 @@
                     <h6 class="card-subtitle mb-2 text-body-secondary"><%= data[i].created_by %></h6>
                     <p class="card-text"><%= data[i].comments %></p>
                     <h6>Score: <%= data[i].ranking %></h6>
+                    <form action="/delete/<%= data[i].id %>" method="POST">
+                        <button type="submit" class="btn btn-dark">Delete</button>
+                    </form>
                 </div>
-                </div>
+            </div>
         <% } %>
     </div>
-    
-    </table>
 <% } else if (error) { %>
     <div class="titles">
         <h3><%= error %></h3>
