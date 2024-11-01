@@ -1,4 +1,4 @@
-//supabase pw: Licea58Dominguez%
+import {API_BASE_URL} from "./config.js";
 import { createClient } from "@supabase/supabase-js";
 import express from "express";
 import bodyParser from "body-parser";
@@ -26,20 +26,6 @@ async function fetchData() {
 
     return data;
 }
-
-//Function to get data
-app.get("/", async (req, res)=>{
-    try{
-        const response = await fetchData();
-        //console.log(response);
-        res.render("index.ejs", {data : response});
-    } catch(error) {
-        console.error("Error:", error.message);
-        res.render("index.ejs", {
-          error: error,
-        });
-    }
-});
 
 //Function to post data
 async function postData(movieName,creatorName,score,comments){
@@ -73,7 +59,20 @@ async function deleteData(id){
     return data;
 }
 
-app.get("/new", async (req, res)=>{
+app.get(`${API_BASE_URL}/`, async (req, res)=>{
+    try{
+        const response = await fetchData();
+        //console.log(response);
+        res.render("index.ejs", {data : response});
+    } catch(error) {
+        console.error("Error:", error.message);
+        res.render("index.ejs", {
+          error: error,
+        });
+    }
+});
+
+app.get(`${API_BASE_URL}/new`, async (req, res)=>{
     try{
         res.render("new_entry.ejs");
     }catch(error){
@@ -81,7 +80,7 @@ app.get("/new", async (req, res)=>{
     }
 });
 
-app.post("/new", async (req, res)=>{
+app.post(`${API_BASE_URL}/new`, async (req, res)=>{
     const { movie, creator, score, comments } = req.body;
     try{
         const insertedData = await postData(movie,creator,score,comments);
@@ -95,7 +94,7 @@ app.post("/new", async (req, res)=>{
     }
 });
 
-app.post("/delete/:id", async(req,res) => {
+app.post(`${API_BASE_URL}/delete/:id`, async(req,res) => {
     const id = req.params.id;
     
     try{
