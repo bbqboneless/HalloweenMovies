@@ -1,4 +1,3 @@
-import {API_BASE_URL} from "./config.js";
 import { createClient } from "@supabase/supabase-js";
 import express from "express";
 import bodyParser from "body-parser";
@@ -59,7 +58,7 @@ async function deleteData(id){
     return data;
 }
 
-app.get(`${API_BASE_URL}/`, async (req, res)=>{
+app.get("/", async (req, res)=>{
     try{
         const response = await fetchData();
         //console.log(response);
@@ -72,7 +71,7 @@ app.get(`${API_BASE_URL}/`, async (req, res)=>{
     }
 });
 
-app.get(`${API_BASE_URL}/new`, async (req, res)=>{
+app.get("/new", async (req, res)=>{
     try{
         res.render("new_entry.ejs");
     }catch(error){
@@ -80,7 +79,7 @@ app.get(`${API_BASE_URL}/new`, async (req, res)=>{
     }
 });
 
-app.post(`${API_BASE_URL}/new`, async (req, res)=>{
+app.post("/new", async (req, res)=>{
     const { movie, creator, score, comments } = req.body;
     try{
         const insertedData = await postData(movie,creator,score,comments);
@@ -94,7 +93,7 @@ app.post(`${API_BASE_URL}/new`, async (req, res)=>{
     }
 });
 
-app.post(`${API_BASE_URL}/delete/:id`, async(req,res) => {
+app.post("/delete/:id", async(req,res) => {
     const id = req.params.id;
     
     try{
